@@ -1,0 +1,13 @@
+{
+  "name": "onlinebet-fairness-verifier",
+  "version": "1.0.0",
+  "description": "Recompute any OnlineBet.Game round from its seeds.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "onlinebet-verify": "verify.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
