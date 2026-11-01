@@ -1,0 +1,27 @@
+// The games, in lobby order. Edit SITE if the casino's address changes.
+export const SITE = 'https://onlinebet.game';
+export const GAMES = [
+  { slug: 'limbo', name: 'Limbo' },
+  { slug: 'plinko', name: 'Plinko' },
+  { slug: 'crash', name: 'Crash' },
+  { slug: 'mines', name: 'Mines' },
+  { slug: 'ring-of-fortune', name: 'Ring of Fortune' },
+  { slug: 'twist', name: 'Twist' },
+  { slug: 'space-travel', name: 'Space Travel' },
+  { slug: 'stellar-rush', name: 'Stellar Rush' },
+  { slug: 'hilo', name: 'Hi-Lo' },
+  { slug: 'classic-dice', name: 'Classic Dice' },
+  { slug: 'dice', name: 'Dice' },
+  { slug: 'hash-dice', name: 'Hash Dice' },
+  { slug: 'keno', name: 'Keno' },
+  { slug: 'coin-flip', name: 'Coin Flip' },
+  { slug: 'bubble-shooter', name: 'Bubble Shooter' },
+  { slug: 'roulette', name: 'Roulette' },
+  { slug: 'bingo', name: 'Bingo' },
+  { slug: 'color-game', name: 'Color Game' },
+  { slug: 'baccarat', name: 'Baccarat' },
+  { slug: 'video-poker', name: 'Video Poker' },
+  { slug: 'dragon-phoenix', name: 'Dragon & Phoenix' },
+  { slug: 'caribbean-poker', name: 'Caribbean Poker' },
+  { slug: 'oasis-poker', name: 'Oasis Poker' },
+];

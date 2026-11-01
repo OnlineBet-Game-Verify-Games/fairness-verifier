@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twist verifier · OnlineBet.Game</title>
+<meta name="description" content="Check any OnlineBet.Game Twist round from its seeds. Runs in your browser.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-game="twist">
+<div class="wrap">
+  <header class="top"><h1>Twist · Provably fair verifier</h1><a class="home" href="index.html">All games</a></header>
+  <nav class="switch" id="switch" aria-label="Games"></nav>
+  <div class="card"><h2>Verify a round</h2>
+    <p class="muted">Paste the values from your bet slip. The result is calculated right here in your browser; nothing is sent anywhere.</p>
+    <form id="form"></form>
+    <div id="result"></div>
+  </div>
+  <div class="card"><h2>How Twist is calculated</h2><div class="text" id="method"></div></div>
+  <div id="stream"></div>
+  <footer>Open source: the same code as the Verify tool on <a id="site" href="https://onlinebet.game">OnlineBet.Game</a>.</footer>
+</div>
+<script type="module" src="assets/verify.js"></script>
+</body>
+</html>

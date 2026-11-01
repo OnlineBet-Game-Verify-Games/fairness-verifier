@@ -220,7 +220,7 @@ function deck(decks = 1) {
     for (const suit of SUITS) for (let rank = 2; rank <= 14; rank++) out.push({ rank, suit });
   return out;
 }
-var DECK_TEXT = "The deck starts in a fixed order, spades, hearts, diamonds, clubs, each from 2 up to the ace, and is shuffled with the **Fisher\u2013Yates** method: going from the last card to the second, each card swaps places with a random card at or before it, chosen with one number from the stream: floor(number \xD7 (position + 1)).";
+var DECK_TEXT = "The deck starts in a fixed order: spades, hearts, diamonds, clubs, each from 2 up to the ace. It is then shuffled with the **Fisher\u2013Yates** method. Starting from the last card, each card swaps places with a random card at or before it, picked with the next number: floor(number \xD7 (position + 1)).";
 var DEFAULT_RTP_PARAM = {
   key: "rtp",
   label: "RTP (%)",
@@ -236,7 +236,7 @@ function diceGame(name) {
     method: `${name} uses the first number of the round.
 
 - Roll = floor(number \xD7 10,000) \xF7 100, which gives a value from **0.00 to 99.99**, every value equally likely.
-- Your bet wins when the roll lands in the range you picked.`,
+- You win when the roll lands in the range you picked.`,
     verify(i) {
       const roll = Math.floor(rngOf(i).float() * OUTCOMES_DICE) / 100;
       return [{ kind: "rows", rows: [{ label: "Roll", value: fixed(roll) }] }];
@@ -301,7 +301,7 @@ var FAIR_GAMES = {
     }
   },
   limbo: {
-    method: `Limbo turns the first number of the round into a multiplier.
+    method: `Limbo turns the round's first number into a multiplier.
 
 - Multiplier = (RTP \xF7 100) \xF7 (1 \u2212 number), rounded **down** to two decimals.
 - It's never below 1.00\xD7 and is capped at 1,000,000\xD7.
@@ -345,7 +345,7 @@ With 99% RTP, a round reaches 2\xD7 about 49.5% of the time and 10\xD7 about 9.9
     }
   },
   plinko: {
-    method: `The ball meets one peg per row, and each bounce uses the next number of the round.
+    method: `The ball hits one peg per row, and each bounce uses the next number.
 
 - A number below 0.5 sends it **left**, 0.5 or above sends it **right**.
 - The slot it lands in is the number of right bounces: 0 is the far left slot, and with 16 rows, 16 is the far right one.
@@ -469,7 +469,7 @@ With 99% RTP, a round reaches 2\xD7 about 49.5% of the time and 10\xD7 about 9.9
     }
   },
   "stellar-rush": {
-    method: `A run is 36 hops long, and each hop uses the next number of the round, decided before you start.
+    method: `A run is 36 hops long. Each hop uses the next number, and they're all decided before you start.
 
 - A hop survives when its number is **below** that hop's survival chance, which the game shows for your difficulty.
 - The run ends at the first hop that doesn't survive.`,
@@ -667,15 +667,15 @@ ${DECK_TEXT}
 };
 var STREAM_TEXT = `Every round's numbers come from three values:
 
-- the **server seed**, made by us at random; you see its SHA-256 hash before you bet,
-- the **client seed**, which you can change at any time,
-- the **nonce**, which counts your bets: 1 for the first, 2 for the second, and so on.
+- the **server seed**, made by us at random. You see its SHA-256 hash before you bet.
+- the **client seed**, which is yours to change at any time.
+- the **nonce**, which counts your bets: 1, 2, 3 and so on.
 
-The numbers are HMAC_SHA256(server seed, client seed:nonce:0), then \u2026:1, \u2026:2 if a round needs more. Each result is 32 bytes, read as eight numbers of four bytes each (big-endian), each divided by 2\xB3\xB2 to give a number from 0 up to, but never reaching, 1. When a game says "next number", it means the next one in this list.
+They're combined with HMAC-SHA256, a standard way of hashing: HMAC_SHA256(server seed, "client seed:nonce:0"). That gives 32 bytes. Every 4 bytes, divided by 2\xB3\xB2, make a number between 0 and 1, so one hash gives eight numbers. If a round needs more, the 0 at the end becomes 1, then 2, and so on. When a game's method says "the next number", it means the next one in this list.
 
-Some parts of a round have their own stream, with a name put before the counter: client seed:nonce:name:0, \u2026:1. That way one part of a round never shifts another.
+Some parts of a round have their own list, with a name added: "client seed:nonce:name:0". That way, one part of a round never shifts another.
 
-When you change your seeds, the old server seed is revealed. Check that its SHA-256 matches the hash you were shown, and recompute any round with the Verify tool.`;
+When you change your seeds, the old server seed is revealed. Check that its hash matches the one you were shown, then check any round with the Verify tool below.`;
 export {
   FAIR_GAMES,
   FairRng,
