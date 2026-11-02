@@ -17,7 +17,9 @@ const head = (title, description) => `<!doctype html>
 </head>`;
 
 for (const g of GAMES) {
-  writeFileSync(`${g.slug}.html`, `${head(`${g.name} verifier · OnlineBet.Game`, `Check any OnlineBet.Game ${g.name} round from its seeds. Runs in your browser.`)}
+  writeFileSync(
+    `${g.slug}.html`,
+    `${head(`${g.name} verifier · OnlineBet.Game`, `Check any OnlineBet.Game ${g.name} round from its seeds. Runs in your browser.`)}
 <body data-game="${g.slug}">
 <div class="wrap">
   <header class="top"><h1>${esc(g.name)} · Provably fair verifier</h1><a class="home" href="index.html">All games</a></header>
@@ -34,10 +36,13 @@ for (const g of GAMES) {
 <script type="module" src="assets/verify.js"></script>
 </body>
 </html>
-`);
+`,
+  );
 }
 
-writeFileSync('index.html', `${head('Provably fair verifier · OnlineBet.Game', 'Check any OnlineBet.Game round yourself, game by game. Open source, runs in your browser.')}
+writeFileSync(
+  'index.html',
+  `${head('Provably fair verifier · OnlineBet.Game', 'Check any OnlineBet.Game round yourself, game by game. Open source, runs in your browser.')}
 <body>
 <div class="wrap">
   <header class="top"><h1>OnlineBet.Game · Provably fair verifier</h1><a class="home" href="${SITE}/help/provably-fair">Provably Fair page</a></header>
@@ -51,5 +56,6 @@ ${GAMES.map((g) => `      <li><a href="${g.slug}.html">${esc(g.name)}</a></li>`)
 </div>
 </body>
 </html>
-`);
+`,
+);
 console.log(`Wrote index.html and ${GAMES.length} game pages.`);
